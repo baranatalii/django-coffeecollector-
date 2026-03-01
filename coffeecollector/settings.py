@@ -79,8 +79,8 @@ WSGI_APPLICATION = 'coffeecollector.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'catcollector', # We are reusing the existing DB
-        'USER': 'cat_admin',
+        'NAME': 'coffeecollector',  # Database name updated
+        'USER': 'cat_admin',       # You might want to rename this user later, but this works for now
         'PASSWORD': 'password',
         'HOST': 'localhost',
     }
