@@ -7,11 +7,21 @@ MEALS = (
     ('D', 'Dinner')
 )
 
+class Flavor(models.Model):
+    name = models.CharField(max_length=50)
+    notes = models.CharField(max_length=100)
+    # 1. Removed ForeignKey: coffee = models.ForeignKey(Coffee, ...)
+
+    def __str__(self):
+        return self.name
+
 class Coffee(models.Model):
     name = models.CharField(max_length=100)
     brand = models.CharField(max_length=100)
     description = models.TextField(max_length=250)
     roast = models.CharField(max_length=100)
+    # 2. Added ManyToManyField
+    flavors = models.ManyToManyField(Flavor)
 
     def __str__(self):
         return self.name
@@ -28,10 +38,8 @@ class Feeding(models.Model):
     )
     coffee = models.ForeignKey(Coffee, on_delete=models.CASCADE)
 
-    # --- ADD THIS CLASS ---
     class Meta:
         ordering = ['-date'] # Orders feedings by date descending
-    # ----------------------
 
     def __str__(self):
         return f"{self.get_meal_display()} on {self.date}"
